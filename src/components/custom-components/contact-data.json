@@ -1,0 +1,23 @@
+{
+  "collectionName": "components_custom_components_contact_data",
+  "info": {
+    "displayName": "Contact Details",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "firstName": {
+      "type": "string"
+    },
+    "lastName": {
+      "type": "string",
+      "required": true
+    },
+    "phone": {
+      "type": "string"
+    },
+    "emailAddress": {
+      "type": "email"
+    }
+  }
+}

@@ -1,0 +1,62 @@
+{
+  "kind": "collectionType",
+  "collectionName": "tickets",
+  "info": {
+    "singularName": "ticket",
+    "pluralName": "tickets",
+    "displayName": "Ticket"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "ticketStatus": {
+      "type": "enumeration",
+      "enum": [
+        "paid",
+        "unpaid"
+      ]
+    },
+    "price": {
+      "type": "decimal"
+    },
+    "format": {
+      "type": "enumeration",
+      "enum": [
+        "e-ticket",
+        "paper-ticket",
+        "qr-code"
+      ]
+    },
+    "zone": {
+      "type": "enumeration",
+      "enum": [
+        "zone1",
+        "zone2",
+        "zone3",
+        "zone4",
+        "zone5"
+      ]
+    },
+    "seat": {
+      "type": "string",
+      "required": false
+    },
+    "refundPolicy": {
+      "type": "blocks"
+    },
+    "ticketType": {
+      "type": "enumeration",
+      "enum": [
+        "regular",
+        "vip",
+        "special"
+      ]
+    },
+    "accessibility_features": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::accessibility-feature.accessibility-feature"
+    }
+  }
+}
