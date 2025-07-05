@@ -14,7 +14,7 @@
     "password": "Password",
     "repeatPassword": "Repeat Password",
     "language": "Language",
-    "isDisabled": "Is Disabled",
+    "isDisabled": "I have a disability card",
     "disabilityCard": {
       "title": "Disability Card Information",
       "cardId": "Card ID",

@@ -1,5 +1,8 @@
 import {create} from 'zustand'
-import {register, login} from "../consts/apiRoutes.js";
+import {register , login , currentUserUrl , disabilityCards , uploadFile} from "../consts/apiRoutes.js";
+import { FormData } from 'formdata-node';
+
+
 
 const useSignUpStore = create((set) => ({
   isLoading: false,
@@ -25,6 +28,41 @@ const useSignUpStore = create((set) => ({
 
       const { user: createdUser, jwt } = await registerResponse.json();
       set({jwt: jwt});
+      let disabilityCard = null
+      if(userData.isDisabled){
+        const form = new FormData();
+
+        form.append('files', userData.cardImage, `${createdUser.documentId}_disability_card_proof.png`);
+        const uploadProof = await fetch(uploadFile, {
+          method: 'POST',
+          headers: {
+            'Authorization': `Bearer ${jwt}`,
+          },
+          body:form
+        })
+
+        const proof = await uploadProof.json()
+        const createDisCardResponse = await fetch(disabilityCards, {
+          method: "POST",
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${jwt}`,
+          },
+          body: JSON.stringify({data: {
+              number : userData.cardId ,
+              expiry : userData.expiryDate ,
+              issuingDate : userData.dateOfIssuing ,
+            }
+          }),
+        })
+        if(createDisCardResponse.ok){
+          const disCardData = await createDisCardResponse.json()
+          disabilityCard = disCardData.data
+        }
+      }
+      if(disabilityCard){
+        userData.disability_card = disabilityCard
+      }
       const updateResponse = await fetch(currentUserUrl(createdUser.id), {
         method: 'PUT',
         headers: {
@@ -32,7 +70,8 @@ const useSignUpStore = create((set) => ({
           'Authorization': `Bearer ${jwt}`,
         },
         body: JSON.stringify({
-          ...userData,
+            ...userData ,
+
         }),
       });
 

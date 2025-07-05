@@ -12,3 +12,9 @@ export const event = (id) => `${API}/events/${id}`
 export const imageRoute = (id) => `http://localhost:1337${id}`
 
 export const accessibilityNeedsRoute = (id) => `${API}/accessibility-needs/${id}?populate=*`
+
+export const disabilityCards = `${API}/disability-cards`
+
+export const disabilityCardById = (id)=>`${API}/disability-cards/${id}`
+
+export const uploadFile = `${API}/upload`

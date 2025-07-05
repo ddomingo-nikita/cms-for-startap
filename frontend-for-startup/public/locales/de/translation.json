@@ -15,7 +15,7 @@
     "password": "Passwort",
     "repeatPassword": "Passwort wiederholen",
     "language": "Sprache",
-    "isDisabled": "Ist behindert",
+    "isDisabled": "Ich habe einen Schwerbehindertenausweis",
     "disabilityCard": {
       "title": "Informationen zur Behindertenkarte",
       "cardId": "Karten-ID",

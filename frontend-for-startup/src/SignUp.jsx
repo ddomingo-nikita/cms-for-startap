@@ -4,29 +4,16 @@ import { useDropzone } from 'react-dropzone';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import useSignUpStore from './stores/signUpStore';
+import {toast} from "react-toastify";
 
-const CommonForm = ({ type, onSubmit }) => {
+const CommonForm = ({ handleChange, formData }) => {
   const { t } = useTranslation();
-  const [formData, setFormData] = useState({
-    firstName: '',
-    lastName: '',
-    email: '',
-    username: '',
-    password: '',
-    repeatPassword: '',
-    language: '',
-    birthday: '',
-  });
 
-  const handleChange = (event) => {
-    const { name, value } = event.target;
-    setFormData(prevData => ({ ...prevData, [name]: value }));
-  };
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    onSubmit(formData, type);
-  };
+  // const handleSubmit = (event) => {
+  //   event.preventDefault();
+  //   onSubmit(formData, type);
+  // };
 
   return (
     <Box sx={{ mt: 3 }}>
@@ -81,17 +68,35 @@ const CommonForm = ({ type, onSubmit }) => {
           <MenuItem value="Deutsch">Deutsch</MenuItem>
         </Select>
       </FormControl>
-      <Box sx={{ mt: 3, display: 'flex', justifyContent: 'center' }}>
-        <Button variant="contained" onClick={handleSubmit}>{t('sign_up.submit')}</Button>
-      </Box>
     </Box>
   );
 };
 
 const UserForm = ({ onSubmit }) => {
   const { t } = useTranslation();
-  const [isDisabled, setIsDisabled] = useState(true);
+  const [formData, setFormData] = useState({
+    firstName: '',
+    lastName: '',
+    email: '',
+    username: '',
+    password: '',
+    repeatPassword: '',
+    language: '',
+    birthday: '',
+    isDisabled: true,
+    cardId: '',
+    dateOfIssuing: '',
+    expiryDate: '',
+  });
   const [cardImage, setCardImage] = useState(null);
+
+  const handleChange = (event) => {
+    const { name, value, type, checked } = event.target;
+    setFormData(prevData => ({
+      ...prevData,
+      [name]: type === 'checkbox' ? checked : value
+    }));
+  };
 
   const onDrop = useCallback(acceptedFiles => {
     setCardImage(acceptedFiles[0]);
@@ -101,23 +106,51 @@ const UserForm = ({ onSubmit }) => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    onSubmit({ isDisabled, cardImage });
+    onSubmit({ ...formData, cardImage });
   };
 
   return (
     <Box sx={{ mt: 3 }}>
-      <CommonForm type="user" onSubmit={onSubmit} />
+      <CommonForm formData={formData} handleChange={handleChange} />
       <FormControlLabel
-        control={<Checkbox checked={isDisabled} onChange={(e) => setIsDisabled(e.target.checked)} />}
+        control={<Checkbox checked={formData.isDisabled} onChange={handleChange} name="isDisabled" />}
         label={t('sign_up.isDisabled')}
         sx={{marginRight: 0}}
       />
-      {isDisabled && (
+      {formData.isDisabled && (
         <Box sx={{ mt: 2, p: 2, border: '1px solid #ccc', borderRadius: 1 }}>
           <Typography variant="h6" gutterBottom>{t('sign_up.disabilityCard.title')}</Typography>
-          <TextField fullWidth margin="normal" label={t('sign_up.disabilityCard.cardId')} required />
-          <TextField fullWidth margin="normal" label={t('sign_up.disabilityCard.dateOfIssuing')} type="date" InputLabelProps={{ shrink: true }} required />
-          <TextField fullWidth margin="normal" label={t('sign_up.disabilityCard.expiryDate')} type="date" InputLabelProps={{ shrink: true }} required />
+          <TextField
+            fullWidth
+            margin="normal"
+            name="cardId"
+            label={t('sign_up.disabilityCard.cardId')}
+            value={formData.cardId}
+            onChange={handleChange}
+            required
+          />
+          <TextField
+            fullWidth
+            margin="normal"
+            name="dateOfIssuing"
+            label={t('sign_up.disabilityCard.dateOfIssuing')}
+            type="date"
+            InputLabelProps={{ shrink: true }}
+            value={formData.dateOfIssuing}
+            onChange={handleChange}
+            required
+          />
+          <TextField
+            fullWidth
+            margin="normal"
+            name="expiryDate"
+            label={t('sign_up.disabilityCard.expiryDate')}
+            type="date"
+            InputLabelProps={{ shrink: true }}
+            value={formData.expiryDate}
+            onChange={handleChange}
+            required
+          />
           <Box {...getRootProps()} sx={{
             mt: 2,
             p: 2,
@@ -136,17 +169,13 @@ const UserForm = ({ onSubmit }) => {
           {cardImage && <Typography sx={{ mt: 1 }}>{t('sign_up.disabilityCard.fileSelected')} {cardImage.name}</Typography>}
         </Box>
       )}
+      <Box sx={{ mt: 3, display: 'flex', justifyContent: 'center' }}>
+        <Button variant="contained" onClick={handleSubmit}>{t('sign_up.submit')}</Button>
+      </Box>
     </Box>
   );
 };
 
-const OrganizerForm = ({ onSubmit }) => {
-  return <CommonForm type="organizer" onSubmit={onSubmit} />;
-};
-
-const VenueOwnerForm = ({ onSubmit }) => {
-  return <CommonForm type="venue" onSubmit={onSubmit} />;
-};
 
 export const SignUp = () => {
     const { t } = useTranslation();
@@ -161,9 +190,9 @@ export const SignUp = () => {
     const handleSubmit = async (formData, userType) => {
       try {
         await signUp(formData, userType);
-        navigate('/events'); // Редирект на страницу событий после успешной регистрации
+        navigate('/events');
       } catch (error) {
-        // Ошибка уже обрабатывается в хранилище
+          toast.error(error)
       }
     };
 
@@ -174,27 +203,11 @@ export const SignUp = () => {
             </Typography>
             {error && <Alert severity="error">{error}</Alert>}
             {user && <Alert severity="success">{t('sign_up.success')}</Alert>}
-            {/*<Box sx={{ borderBottom: 1, borderColor: 'divider' }}>*/}
-            {/*    <Tabs value={value} onChange={handleChange} aria-label="account type tabs">*/}
-            {/*        <Tab label={t('sign_up.user')} />*/}
-            {/*        <Tab label={t('sign_up.eventOrganizer')} />*/}
-            {/*        <Tab label={t('sign_up.venueOwner')} />*/}
-            {/*    </Tabs>*/}
-            {/*</Box>*/}
+
             <Box sx={{p:3}}>
                 <UserForm onSubmit={(data) => handleSubmit(data, 'user')}/>
             </Box>
-            {/*<Box sx={{ p: 3 }}>*/}
-            {/*    {isLoading ? (*/}
-            {/*      <CircularProgress />*/}
-            {/*    ) : (*/}
-            {/*      <>*/}
-            {/*        {value === 0 && <UserForm onSubmit={(data) => handleSubmit(data, 'user')} />}*/}
-            {/*        {value === 1 && <OrganizerForm onSubmit={(data) => handleSubmit(data, 'organizer')} />}*/}
-            {/*        {value === 2 && <VenueOwnerForm onSubmit={(data) => handleSubmit(data, 'venue')} />}*/}
-            {/*      </>*/}
-            {/*    )}*/}
-            {/*</Box>*/}
+
         </Container>
     );
 }
