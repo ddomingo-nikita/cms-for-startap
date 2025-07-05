@@ -15,9 +15,9 @@ export const SignIn = () => {
         event.preventDefault();
         try {
             await signIn(email, password);
-            navigate('/events'); // Редирект на страницу событий после успешного входа
+            navigate('/events');
         } catch (error) {
-            // Ошибка уже обрабатывается в хранилище
+
         }
     };
 
