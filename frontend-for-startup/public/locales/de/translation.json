@@ -1,0 +1,66 @@
+{
+  "startupAdmin": "StartupAdmin",
+  "signIn": "Anmelden",
+  "logout": "Abmelden",
+
+  "sign_up": {
+    "title": "Konto erstellen als",
+    "user": "Benutzer",
+    "eventOrganizer": "Veranstalter",
+    "venueOwner": "Veranstaltungsortbesitzer",
+    "firstName": "Vorname",
+    "lastName": "Nachname",
+    "email": "E-Mail",
+    "username": "Benutzername",
+    "password": "Passwort",
+    "repeatPassword": "Passwort wiederholen",
+    "language": "Sprache",
+    "isDisabled": "Ist behindert",
+    "disabilityCard": {
+      "title": "Informationen zur Behindertenkarte",
+      "cardId": "Karten-ID",
+      "dateOfIssuing": "Ausstellungsdatum",
+      "expiryDate": "Ablaufdatum",
+      "dropImage": "Ziehen Sie das Bild der Behindertenkarte hierher oder klicken Sie, um eine Datei auszuwählen",
+      "dropImageActive": "Lassen Sie das Bild hier fallen ...",
+      "fileSelected": "Datei ausgewählt:"
+    },
+    "birthday": "Geburtsdatum",
+    "submit": "Registrieren",
+    "success": "Konto erfolgreich erstellt!"
+  },
+  "sign_in": {
+    "title": "Anmelden",
+    "email": "E-Mail-Adresse",
+    "password": "Passwort",
+    "submit": "Anmelden",
+    "noAccount": "Noch kein Konto? Registrieren"
+  },
+  "events": {
+    "title": "Veranstaltungen",
+    "loading": "Laden...",
+    "book": "Buchen",
+    "details": "Details",
+    "accessibilityNeeds": "Barrierefreiheit",
+    "description": "Beschreibung",
+    "type": "Veranstaltungstyp",
+    "language": "Sprache",
+    "startTime": "Beginn",
+    "endTime": "Ende",
+    "location": "Veranstaltungsort",
+    "locationName": "Name des Veranstaltungsorts",
+    "noResults": "Keine Veranstaltungen gefunden, die Ihren Suchkriterien entsprechen.",
+    "capacity": "Kapazität",
+    "website": "Webseite",
+    "closeModal": "Schließen",
+    "bookingSuccess": "Veranstaltung erfolgreich gebucht!",
+    "search": "Veranstaltungen suchen",
+    "accessibleOnly": "Nur barrierefreie Veranstaltungen",
+    "searchButton": "Suchen"
+  },
+  "home": {
+    "title": "Administrationsbereich für CMS",
+    "signUp": "Registrieren",
+    "signIn": "Anmelden"
+  }
+}

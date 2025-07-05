@@ -534,13 +534,13 @@ export interface ApiEventEvent extends Struct.CollectionTypeSchema {
     };
   };
   attributes: {
-    accessibility_needs: Schema.Attribute.Relation<
-      'manyToMany',
-      'api::accessibility-need.accessibility-need'
-    >;
     accessibilityFeatures: Schema.Attribute.Relation<
       'manyToMany',
       'api::accessibility-feature.accessibility-feature'
+    >;
+    accessibilityNeeds: Schema.Attribute.Relation<
+      'manyToMany',
+      'api::accessibility-need.accessibility-need'
     >;
     capacity: Schema.Attribute.Integer &
       Schema.Attribute.SetPluginOptions<{

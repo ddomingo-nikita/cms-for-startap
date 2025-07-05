@@ -1,0 +1,66 @@
+{
+  "startupAdmin": "StartupAdmin",
+  "signIn": "Sign In",
+  "logout": "Log Out",
+  "sign_up": {
+    "title": "Create account as",
+    "user": "User",
+    "eventOrganizer": "Event Organizer",
+    "venueOwner": "Venue Owner",
+    "firstName": "First Name",
+    "lastName": "Last Name",
+    "email": "Email",
+    "username": "Username",
+    "password": "Password",
+    "repeatPassword": "Repeat Password",
+    "language": "Language",
+    "isDisabled": "Is Disabled",
+    "disabilityCard": {
+      "title": "Disability Card Information",
+      "cardId": "Card ID",
+      "dateOfIssuing": "Date of Issuing",
+      "expiryDate": "Expiry Date",
+      "dropImage": "Drag 'n' drop disability card image here, or click to select file",
+      "dropImageActive": "Drop the image here ...",
+      "fileSelected": "File selected:"
+    },
+    "birthday": "Date of Birth",
+    "submit": "Sign Up",
+    "success": "Account created successfully!"
+  },
+  "sign_in": {
+    "title": "Sign In",
+    "email": "Email Address",
+    "password": "Password",
+    "submit": "Sign In",
+    "noAccount": "Don't have an account? Sign Up"
+  },
+  "events": {
+    "title": "Events",
+    "loading": "Loading...",
+    "book": "Book",
+    "accessibilityNeeds": "Accessibility Needs",
+    "details": "Details",
+    "description": "Description",
+    "type": "Event Type",
+    "language": "Language",
+    "startTime": "Start Time",
+    "endTime": "End Time",
+    "location": "Location",
+    "noResults": "No events found matching your search criteria.",
+    "locationName": "Venue",
+    "capacity": "Capacity",
+    "website": "Website",
+    "closeModal": "Close",
+    "search": "Search events",
+    "accessibleOnly": "Accessible events only",
+    "bookingSuccess": "Event booked successfully!",
+
+    "searchButton": "Search"
+  },
+  "home": {
+    "title": "Admin panel for CMS",
+    "signUp": "Sign Up",
+    "signIn": "Sign In"
+  }
+}

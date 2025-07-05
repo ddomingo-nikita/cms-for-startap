@@ -126,7 +126,7 @@
         }
       }
     },
-    "accessibility_needs": {
+    "accessibilityNeeds": {
       "type": "relation",
       "relation": "manyToMany",
       "target": "api::accessibility-need.accessibility-need",

@@ -31,7 +31,7 @@
       "type": "relation",
       "relation": "manyToMany",
       "target": "api::event.event",
-      "mappedBy": "accessibility_needs"
+      "mappedBy": "accessibilityNeeds"
     }
   }
 }
